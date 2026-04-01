@@ -1,0 +1,30 @@
+============================================================
+DATA VALIDATION REPORT
+Generated: 2026-04-01T02:39:41.579359
+============================================================
+
+Internal checks: 16 issues found (HIGH: 0, MEDIUM: 0, LOW: 16)
+
+  [LOW] monthly_gap: 1 China: 13 gaps > 45 days in bulletin sequence
+  [LOW] monthly_gap: 1 India: 15 gaps > 45 days in bulletin sequence
+  [LOW] monthly_gap: 1 Mexico: 15 gaps > 45 days in bulletin sequence
+  [LOW] monthly_gap: 1 Philippines: 15 gaps > 45 days in bulletin sequence
+  [LOW] monthly_gap: 2 China: 13 gaps > 45 days in bulletin sequence
+  [LOW] monthly_gap: 2 India: 15 gaps > 45 days in bulletin sequence
+  [LOW] monthly_gap: 2 Mexico: 15 gaps > 45 days in bulletin sequence
+  [LOW] monthly_gap: 2 Philippines: 15 gaps > 45 days in bulletin sequence
+  [LOW] monthly_gap: 3 China: 13 gaps > 45 days in bulletin sequence
+  [LOW] monthly_gap: 3 India: 15 gaps > 45 days in bulletin sequence
+  [LOW] monthly_gap: 3 Mexico: 15 gaps > 45 days in bulletin sequence
+  [LOW] monthly_gap: 3 Philippines: 15 gaps > 45 days in bulletin sequence
+  [LOW] monthly_gap: 4 China: 13 gaps > 45 days in bulletin sequence
+  [LOW] monthly_gap: 4 India: 15 gaps > 45 days in bulletin sequence
+  [LOW] monthly_gap: 4 Mexico: 15 gaps > 45 days in bulletin sequence
+  [LOW] monthly_gap: 4 Philippines: 15 gaps > 45 days in bulletin sequence
+
+Cross-source discrepancies: 0 found (HIGH: 0)
+
+
+============================================================
+RESULT: PASSED - No critical issues found.
+============================================================
