@@ -9,6 +9,8 @@ sys.path.insert(0, str(project_root / "src"))
 
 import pandas as pd
 from gc_predict.model.cross_validate import CVConfig, run_cv
+from gc_predict.model.timesfm_model import TIMESFM_AVAILABLE, run_timesfm_cv, TimesFMConfig
+from gc_predict.features.engineer import get_target_columns, get_filing_target_columns
 from gc_predict.viz.plots import plot_training_history
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -37,12 +39,27 @@ def main():
     logger.info("=" * 60)
     tft_cv = run_cv(df, model_type="tft", config=config, checkpoint_dir=checkpoint_dir)
 
+    # Run TimesFM CV if available
+    timesfm_cv = None
+    if TIMESFM_AVAILABLE:
+        logger.info("")
+        logger.info("=" * 60)
+        logger.info("TIMESFM CROSS-VALIDATION (zero-shot)")
+        logger.info("=" * 60)
+        target_cols = get_target_columns(df) + get_filing_target_columns(df)
+        timesfm_cv = run_timesfm_cv(df, target_cols, TimesFMConfig(), config.first_test_year, config.last_test_year)
+    else:
+        logger.info("TimesFM not installed, skipping. Install with: pip install timesfm[torch]")
+
     # Final comparison
     logger.info("")
     logger.info("=" * 60)
     logger.info("FINAL COMPARISON")
     logger.info("=" * 60)
-    for name, cv in [("LSTM", lstm_cv), ("TFT", tft_cv)]:
+    all_models = [("LSTM", lstm_cv), ("TFT", tft_cv)]
+    if timesfm_cv:
+        all_models.append(("TimesFM", timesfm_cv))
+    for name, cv in all_models:
         agg = cv["aggregated_metrics"]
         if agg:
             logger.info(f"{name}:")
