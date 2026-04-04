@@ -10,6 +10,8 @@ sys.path.insert(0, str(project_root / "src"))
 import pandas as pd
 from us_visa_bulletin_forecast.model.cross_validate import CVConfig, run_cv
 from us_visa_bulletin_forecast.model.timesfm_model import TIMESFM_AVAILABLE, run_timesfm_cv, TimesFMConfig
+from us_visa_bulletin_forecast.model.chronos_model import CHRONOS_AVAILABLE, run_chronos_cv, ChronosConfig
+from us_visa_bulletin_forecast.model.moirai_model import MOIRAI_AVAILABLE, run_moirai_cv, MoiraiConfig
 from us_visa_bulletin_forecast.features.engineer import get_target_columns, get_filing_target_columns
 from us_visa_bulletin_forecast.viz.plots import plot_training_history
 
@@ -39,26 +41,31 @@ def main():
     logger.info("=" * 60)
     tft_cv = run_cv(df, model_type="tft", config=config, checkpoint_dir=checkpoint_dir)
 
-    # Run TimesFM CV if available
-    timesfm_cv = None
-    if TIMESFM_AVAILABLE:
-        logger.info("")
-        logger.info("=" * 60)
-        logger.info("TIMESFM CROSS-VALIDATION (zero-shot)")
-        logger.info("=" * 60)
-        target_cols = get_target_columns(df) + get_filing_target_columns(df)
-        timesfm_cv = run_timesfm_cv(df, target_cols, TimesFMConfig(), config.first_test_year, config.last_test_year)
-    else:
-        logger.info("TimesFM not installed, skipping. Install with: pip install timesfm[torch]")
+    # Foundation model CV (zero-shot baselines)
+    target_cols = get_target_columns(df) + get_filing_target_columns(df)
+    foundation_results = []
+
+    for name, available, run_fn, make_config in [
+        ("TimesFM", TIMESFM_AVAILABLE, run_timesfm_cv, TimesFMConfig),
+        ("Chronos-2", CHRONOS_AVAILABLE, run_chronos_cv, ChronosConfig),
+        ("Moirai-2.0", MOIRAI_AVAILABLE, run_moirai_cv, MoiraiConfig),
+    ]:
+        if available:
+            logger.info("")
+            logger.info("=" * 60)
+            logger.info(f"{name} CROSS-VALIDATION (zero-shot)")
+            logger.info("=" * 60)
+            cv = run_fn(df, target_cols, make_config(), config.first_test_year, config.last_test_year)
+            foundation_results.append((name, cv))
+        else:
+            logger.info(f"{name} not installed, skipping.")
 
     # Final comparison
     logger.info("")
     logger.info("=" * 60)
     logger.info("FINAL COMPARISON")
     logger.info("=" * 60)
-    all_models = [("LSTM", lstm_cv), ("TFT", tft_cv)]
-    if timesfm_cv:
-        all_models.append(("TimesFM", timesfm_cv))
+    all_models = [("LSTM", lstm_cv), ("TFT", tft_cv)] + foundation_results
     for name, cv in all_models:
         agg = cv["aggregated_metrics"]
         if agg:
