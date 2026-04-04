@@ -18,8 +18,8 @@ sys.path.insert(0, str(project_root / "src"))
 import numpy as np
 import pandas as pd
 
-from gc_predict.features.engineer import get_target_columns, get_filing_target_columns
-from gc_predict.model.timesfm_model import (
+from us_visa_bulletin_forecast.features.engineer import get_target_columns, get_filing_target_columns
+from us_visa_bulletin_forecast.model.timesfm_model import (
     TIMESFM_AVAILABLE,
     TimesFMConfig,
     forecast_all_targets,
@@ -77,8 +77,8 @@ def display_prediction(
     df: pd.DataFrame,
 ):
     """Display timeline prediction using TimesFM forecasts."""
-    from gc_predict.data.fetch_visa_bulletin import load_visa_bulletin
-    from gc_predict.predict.inference import get_last_known_dates
+    from us_visa_bulletin_forecast.data.fetch_visa_bulletin import load_visa_bulletin
+    from us_visa_bulletin_forecast.predict.inference import get_last_known_dates
 
     country_key = country.replace(" ", "_")
 

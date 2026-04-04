@@ -248,7 +248,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     project_root = Path(__file__).resolve().parents[3]
 
-    from gc_predict.data.fetch_visa_bulletin import load_visa_bulletin
+    from us_visa_bulletin_forecast.data.fetch_visa_bulletin import load_visa_bulletin
 
     visa_df = load_visa_bulletin(project_root / "data" / "raw" / "visa_bulletin")
 

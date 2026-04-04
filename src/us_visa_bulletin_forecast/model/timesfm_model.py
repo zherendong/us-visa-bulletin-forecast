@@ -237,7 +237,7 @@ def run_timesfm_cv(
     Returns:
         dict with per-fold metrics and aggregated results.
     """
-    from gc_predict.model.evaluate import compute_metrics
+    from us_visa_bulletin_forecast.model.evaluate import compute_metrics
 
     if config is None:
         config = TimesFMConfig()

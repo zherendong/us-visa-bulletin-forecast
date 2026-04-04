@@ -67,7 +67,7 @@ Last Known Filing Date:       2022-01-01
 
 ```
 gc-predict/
-├── src/gc_predict/
+├── src/us_visa_bulletin_forecast/
 │   ├── data/                        # Data collection and processing
 │   │   ├── fetch_visa_bulletin.py       # Download CSV data (DavidBellamy/visa_dates)
 │   │   ├── fetch_visa_bulletin_gov.py   # Scrape travel.state.gov (Filing Dates + newer months)

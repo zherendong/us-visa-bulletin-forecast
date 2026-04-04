@@ -8,10 +8,10 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root / "src"))
 
-from gc_predict.data.fetch_visa_bulletin import fetch_all as fetch_visa_bulletin
-from gc_predict.data.fetch_visa_bulletin_gov import scrape_sample_months
-from gc_predict.data.fetch_i485_inventory import fetch_inventory_files
-from gc_predict.data.fetch_processing_times import fetch_processing_times_db
+from us_visa_bulletin_forecast.data.fetch_visa_bulletin import fetch_all as fetch_visa_bulletin
+from us_visa_bulletin_forecast.data.fetch_visa_bulletin_gov import scrape_sample_months
+from us_visa_bulletin_forecast.data.fetch_i485_inventory import fetch_inventory_files
+from us_visa_bulletin_forecast.data.fetch_processing_times import fetch_processing_times_db
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)

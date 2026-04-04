@@ -12,7 +12,7 @@ import numpy as np
 import pandas as pd
 import torch
 
-from gc_predict.model.architecture import TemporalFusionTransformer, LSTMBaseline
+from us_visa_bulletin_forecast.model.architecture import TemporalFusionTransformer, LSTMBaseline
 
 logger = logging.getLogger(__name__)
 

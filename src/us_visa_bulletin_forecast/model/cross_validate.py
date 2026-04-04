@@ -13,11 +13,11 @@ import pandas as pd
 import torch
 from sklearn.preprocessing import StandardScaler
 
-from gc_predict.features.engineer import get_feature_columns, get_target_columns, get_filing_target_columns
-from gc_predict.model.architecture import LSTMBaseline, TemporalFusionTransformer, QuantileLoss
-from gc_predict.model.dataset import VisaBulletinDataset, create_dataloaders
-from gc_predict.model.evaluate import compute_metrics, evaluate_per_target
-from gc_predict.model.train import train_model
+from us_visa_bulletin_forecast.features.engineer import get_feature_columns, get_target_columns, get_filing_target_columns
+from us_visa_bulletin_forecast.model.architecture import LSTMBaseline, TemporalFusionTransformer, QuantileLoss
+from us_visa_bulletin_forecast.model.dataset import VisaBulletinDataset, create_dataloaders
+from us_visa_bulletin_forecast.model.evaluate import compute_metrics, evaluate_per_target
+from us_visa_bulletin_forecast.model.train import train_model
 
 logger = logging.getLogger(__name__)
 

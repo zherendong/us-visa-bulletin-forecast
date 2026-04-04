@@ -8,10 +8,10 @@ project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root / "src"))
 
 import pandas as pd
-from gc_predict.model.cross_validate import CVConfig, run_cv
-from gc_predict.model.timesfm_model import TIMESFM_AVAILABLE, run_timesfm_cv, TimesFMConfig
-from gc_predict.features.engineer import get_target_columns, get_filing_target_columns
-from gc_predict.viz.plots import plot_training_history
+from us_visa_bulletin_forecast.model.cross_validate import CVConfig, run_cv
+from us_visa_bulletin_forecast.model.timesfm_model import TIMESFM_AVAILABLE, run_timesfm_cv, TimesFMConfig
+from us_visa_bulletin_forecast.features.engineer import get_target_columns, get_filing_target_columns
+from us_visa_bulletin_forecast.viz.plots import plot_training_history
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)

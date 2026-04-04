@@ -8,7 +8,7 @@ import torch.nn as nn
 from torch.optim import AdamW
 from torch.optim.lr_scheduler import CosineAnnealingLR
 
-from gc_predict.model.architecture import LSTMBaseline, QuantileLoss, TemporalFusionTransformer
+from us_visa_bulletin_forecast.model.architecture import LSTMBaseline, QuantileLoss, TemporalFusionTransformer
 
 logger = logging.getLogger(__name__)
 

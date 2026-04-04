@@ -8,9 +8,9 @@ project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root / "src"))
 
 import pandas as pd
-from gc_predict.data.fetch_visa_bulletin import load_visa_bulletin
-from gc_predict.data.fetch_i485_inventory import load_i485_inventory
-from gc_predict.data.validate_sources import run_validation
+from us_visa_bulletin_forecast.data.fetch_visa_bulletin import load_visa_bulletin
+from us_visa_bulletin_forecast.data.fetch_i485_inventory import load_i485_inventory
+from us_visa_bulletin_forecast.data.validate_sources import run_validation
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 

@@ -39,9 +39,10 @@ def validate_visa_bulletin_cross_source(
     csv_df["final_action_date"] = pd.to_datetime(csv_df["final_action_date"])
     gov_df["bulletin_date"] = pd.to_datetime(gov_df["bulletin_date"])
 
-    # Parse gov final_action_date (may be string)
+    # Filter gov to final_action rows only and parse date_value
+    gov_df = gov_df[gov_df["table_type"] == "final_action"].copy()
     gov_df["final_action_date_parsed"] = pd.to_datetime(
-        gov_df["final_action_date"], errors="coerce"
+        gov_df["date_value"], errors="coerce"
     )
 
     # Normalize EB level names for matching
@@ -300,7 +301,7 @@ if __name__ == "__main__":
     project_root = Path(__file__).resolve().parents[3]
 
     # Load visa bulletin CSV data
-    from gc_predict.data.fetch_visa_bulletin import load_visa_bulletin
+    from us_visa_bulletin_forecast.data.fetch_visa_bulletin import load_visa_bulletin
 
     raw_dir = project_root / "data" / "raw" / "visa_bulletin"
     visa_csv_df = load_visa_bulletin(raw_dir) if raw_dir.exists() else None
@@ -311,7 +312,7 @@ if __name__ == "__main__":
     visa_gov_df = pd.read_parquet(gov_path) if gov_path.exists() else None
 
     # Load I-485 data
-    from gc_predict.data.fetch_i485_inventory import load_i485_inventory
+    from us_visa_bulletin_forecast.data.fetch_i485_inventory import load_i485_inventory
 
     i485_dir = project_root / "data" / "raw" / "i485_inventory"
     i485_df = load_i485_inventory(i485_dir) if i485_dir.exists() else None

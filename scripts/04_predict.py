@@ -15,10 +15,10 @@ sys.path.insert(0, str(project_root / "src"))
 
 import numpy as np
 import pandas as pd
-from gc_predict.features.engineer import FeatureConfig, prepare_features, get_feature_columns
-from gc_predict.model.dataset import create_dataloaders
-from gc_predict.predict.inference import load_model, predict_timeline, get_last_known_dates
-from gc_predict.data.fetch_visa_bulletin import load_visa_bulletin
+from us_visa_bulletin_forecast.features.engineer import FeatureConfig, prepare_features, get_feature_columns
+from us_visa_bulletin_forecast.model.dataset import create_dataloaders
+from us_visa_bulletin_forecast.predict.inference import load_model, predict_timeline, get_last_known_dates
+from us_visa_bulletin_forecast.data.fetch_visa_bulletin import load_visa_bulletin
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
